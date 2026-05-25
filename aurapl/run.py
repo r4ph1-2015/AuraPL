@@ -1,4 +1,4 @@
-import __init__ as auraPL
+import aurapl
 
 val = "hello"
 

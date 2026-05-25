@@ -12,8 +12,8 @@ def create_aurapl_bat_and_add_to_path():
     # ── 1. Resolve paths ────────────────────────────────────────────────────────
     # Directory where __init__.py (and aurapl.py) lives
     package_dir = os.path.dirname(os.path.abspath(__file__))
-    bat_path    = os.path.join(package_dir, "aurapl.bat")
-    py_script   = os.path.join(package_dir, "aurapl.py")
+    bat_path    = os.path.join(package_dir, "runaurapl.bat")
+    py_script   = os.path.join(package_dir, "runaurapl.py")
 
     # ── 2. Create the .bat file ──────────────────────────────────────────────────
     bat_content = f"""@echo off
