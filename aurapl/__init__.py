@@ -4,27 +4,17 @@ import sys
 import subprocess
 
 def create_aurapl_bat_and_add_to_path():
-    """
-    Creates a aurapl.bat file that runs aurapl.py,
-    and adds its directory to the system PATH permanently.
-    """
-
-    # ── 1. Resolve paths ────────────────────────────────────────────────────────
-    # Directory where __init__.py (and aurapl.py) lives
     package_dir = os.path.dirname(os.path.abspath(__file__))
-    bat_path    = os.path.join(package_dir, "runaurapl.bat")
-    py_script   = os.path.join(package_dir, "runaurapl.py")
+    bat_path = os.path.join(package_dir, "aurapl.bat")
 
-    # ── 2. Create the .bat file ──────────────────────────────────────────────────
+    # ── 1. Create the .bat file ──────────────────────────────────────────────
     bat_content = f"""@echo off
-"{sys.executable}" "{py_script}" %*
+"{sys.executable}" -c "import aurapl; aurapl.run()" %*
 """
     with open(bat_path, "w") as f:
         f.write(bat_content)
 
-    
-
-    # ── 3. Add the directory to PATH (Windows registry – persists across sessions) ─
+    # ── 2. Add to PATH ───────────────────────────────────────────────────────
     if sys.platform != "win32":
         print("[aurapl] PATH modification is only supported on Windows.")
         return
@@ -44,38 +34,27 @@ def create_aurapl_bat_and_add_to_path():
         except FileNotFoundError:
             current_path = ""
 
-        # Only add if not already present
         path_entries = [p.strip() for p in current_path.split(";") if p.strip()]
         if package_dir not in path_entries:
             new_path = current_path.rstrip(";") + ";" + package_dir
             winreg.SetValueEx(reg_key, "PATH", 0, winreg.REG_EXPAND_SZ, new_path)
-        
 
-            # Broadcast the change so open Explorer / shells pick it up
-            # (new cmd/powershell windows will see it immediately)
             subprocess.run(
-                [
-                    "powershell", "-NoProfile", "-Command",
-                    "[System.Environment]::GetEnvironmentVariable('PATH','User')"
-                ],
+                ["powershell", "-NoProfile", "-Command",
+                 "[System.Environment]::GetEnvironmentVariable('PATH','User')"],
                 capture_output=True,
             )
-            # Notify the system (HWND_BROADCAST + WM_SETTINGCHANGE)
             subprocess.run(
-                [
-                    "powershell", "-NoProfile", "-Command",
-                    "Add-Type -Namespace Win32 -Name NativeMethods "
-                    "-MemberDefinition '[DllImport(\"user32.dll\")]public static extern "
-                    "IntPtr SendMessageTimeout(IntPtr hWnd,uint Msg,UIntPtr wParam,"
-                    "string lParam,uint fuFlags,uint uTimeout,out UIntPtr lpdwResult);';"
-                    "$r=[UIntPtr]::Zero;"
-                    "[Win32.NativeMethods]::SendMessageTimeout([IntPtr]0xffff,0x001A,"
-                    "[UIntPtr]::Zero,'Environment',2,5000,[ref]$r)|Out-Null"
-                ],
+                ["powershell", "-NoProfile", "-Command",
+                 "Add-Type -Namespace Win32 -Name NativeMethods "
+                 "-MemberDefinition '[DllImport(\"user32.dll\")]public static extern "
+                 "IntPtr SendMessageTimeout(IntPtr hWnd,uint Msg,UIntPtr wParam,"
+                 "string lParam,uint fuFlags,uint uTimeout,out UIntPtr lpdwResult);';"
+                 "$r=[UIntPtr]::Zero;"
+                 "[Win32.NativeMethods]::SendMessageTimeout([IntPtr]0xffff,0x001A,"
+                 "[UIntPtr]::Zero,'Environment',2,5000,[ref]$r)|Out-Null"],
                 capture_output=True,
             )
-       
-            
 
         winreg.CloseKey(reg_key)
 
@@ -84,7 +63,6 @@ def create_aurapl_bat_and_add_to_path():
         print(f"[aurapl] Add this directory to PATH manually: {package_dir}")
 
 
-# ── Run on import ────────────────────────────────────────────────────────────────
 create_aurapl_bat_and_add_to_path()
 
 # Basic Run Command
