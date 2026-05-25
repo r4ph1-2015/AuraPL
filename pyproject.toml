@@ -1,6 +1,13 @@
+[build-system]
+requires = ["setuptools>=40.8.0", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
 [project]
 name = "auraPL"
 version = "0.0.1"
 description = "A Programming Language called auraPL"
 requires-python = ">=3.9"
 license = "MIT"
+
+[tool.setuptools.packages.find]
+exclude = ["run*"]
