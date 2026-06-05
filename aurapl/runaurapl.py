@@ -1,3 +1,3 @@
 import aurapl
 
-aurapl.run()
+aurapl.cmdrun()

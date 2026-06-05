@@ -1,2 +1,2 @@
 @echo off
-py -c "import aurapl; aurapl.run()" %*
+"C:\Python314\python.exe" -c "import aurapl; aurapl.cmdrun()" %*

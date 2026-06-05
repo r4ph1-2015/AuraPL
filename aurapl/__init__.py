@@ -65,6 +65,11 @@ def create_aurapl_bat_and_add_to_path():
 
 create_aurapl_bat_and_add_to_path()
 
+# Run Command for Terminal
+def cmdrun():
+    print("[aurapl] AuraPL has been initialized. Expect Bugs and Incomplete Features. Use 'help' command for more info.")
+    run()
+
 # Basic Run Command
 def run():
     answer = input()
