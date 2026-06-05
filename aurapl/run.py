@@ -1,5 +1,3 @@
 import aurapl
 
-val = "hello"
-
-aurapl.print(val)
+aurapl.print("hello world")

@@ -75,9 +75,8 @@ def run():
        print(" More Commands Upcoming")
        print("How to program using AuraPL -")
        print(" All Possible Commands for coding -")
-       print("  val = (value) - sets the value for the next command")
-       print("  print() - prints the value set by val")
+       print("  print() - prints the value in the brackets")
        run()
 
-def print(val):
-    builtins.print(val)
+def print(text):
+    sys.stdout.write(text + "\n")
