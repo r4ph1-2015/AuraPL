@@ -2,6 +2,7 @@ import builtins
 import os
 import sys
 import subprocess
+from turtle import *
 
 def create_aurapl_bat_and_add_to_path():
     package_dir = os.path.dirname(os.path.abspath(__file__))
@@ -85,3 +86,22 @@ def run():
 
 def print(text):
     sys.stdout.write(text + "\n")
+
+def square():
+   
+    def reset():
+        clear()
+        setx(0)
+        sety(0)
+
+    reset()
+    pendown()
+
+    times = 4
+    for i in range(times):
+        forward(100)
+        left(90)
+
+    print("Process has been completed, Review the output and close the windows to end the process.")
+    print("Done!")
+    done()
