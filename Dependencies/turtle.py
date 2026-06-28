@@ -1,8 +1,8 @@
-import turtle as tt
+import turtle
 from turtle import *
 
 
-def tt.square():
+def square():
    
     def reset():
         clear()
