@@ -1,4 +1,4 @@
-import aurapl
-
-aurapl.print("hello world")
-aurapl.square()
+import Aurapl
+from aurapl import *
+print("hello world")
+square()

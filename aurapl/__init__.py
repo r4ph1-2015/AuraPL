@@ -2,49 +2,42 @@ import builtins
 import os
 import sys
 import subprocess
+import stat
+import subprocess
 from turtle import *
 
-def create_aurapl_bat_and_add_to_path():
+def create_aurapl_launcher_and_add_to_path():
     package_dir = os.path.dirname(os.path.abspath(__file__))
-    bat_path = os.path.join(package_dir, "aurapl.bat")
 
-    # ── 1. Create the .bat file ──────────────────────────────────────────────
-    bat_content = f"""@echo off
-"{sys.executable}" -c "import aurapl; aurapl.run()" %*
-"""
-    with open(bat_path, "w") as f:
-        f.write(bat_content)
-
-    # ── 2. Add to PATH ───────────────────────────────────────────────────────
-    if sys.platform != "win32":
-        print("[aurapl] PATH modification is only supported on Windows.")
-        return
-
-    try:
-        import winreg
-
-        reg_key = winreg.OpenKey(
-            winreg.HKEY_CURRENT_USER,
-            r"Environment",
-            0,
-            winreg.KEY_READ | winreg.KEY_WRITE,
-        )
-
+    if sys.platform == "win32":
+        # ── Windows: create .bat ─────────────────────────────────────────
+        launcher_path = os.path.join(package_dir, "aurapl.bat")
+        content = f'@echo off\n"{sys.executable}" -c "import aurapl; aurapl.run()" %*\n'
         try:
-            current_path, _ = winreg.QueryValueEx(reg_key, "PATH")
-        except FileNotFoundError:
-            current_path = ""
+            with open(launcher_path, "w") as f:
+                f.write(content)
+        except PermissionError:
+            print(f"[aurapl] Could not write launcher to {launcher_path}. Try running as administrator.")
 
-        path_entries = [p.strip() for p in current_path.split(";") if p.strip()]
-        if package_dir not in path_entries:
-            new_path = current_path.rstrip(";") + ";" + package_dir
-            winreg.SetValueEx(reg_key, "PATH", 0, winreg.REG_EXPAND_SZ, new_path)
-
-            subprocess.run(
-                ["powershell", "-NoProfile", "-Command",
-                 "[System.Environment]::GetEnvironmentVariable('PATH','User')"],
-                capture_output=True,
+        # ── Windows: add to PATH via registry ────────────────────────────
+        try:
+            import winreg
+            reg_key = winreg.OpenKey(
+                winreg.HKEY_CURRENT_USER,
+                r"Environment",
+                0,
+                winreg.KEY_READ | winreg.KEY_WRITE,
             )
+            try:
+                current_path, _ = winreg.QueryValueEx(reg_key, "PATH")
+            except FileNotFoundError:
+                current_path = ""
+            path_entries = [p.strip() for p in current_path.split(";") if p.strip()]
+            if package_dir not in path_entries:
+                new_path = current_path.rstrip(";") + ";" + package_dir
+                winreg.SetValueEx(reg_key, "PATH", 0, winreg.REG_EXPAND_SZ, new_path)
+            winreg.CloseKey(reg_key)
+            # Broadcast WM_SETTINGCHANGE so the new PATH takes effect immediately
             subprocess.run(
                 ["powershell", "-NoProfile", "-Command",
                  "Add-Type -Namespace Win32 -Name NativeMethods "
@@ -56,15 +49,48 @@ def create_aurapl_bat_and_add_to_path():
                  "[UIntPtr]::Zero,'Environment',2,5000,[ref]$r)|Out-Null"],
                 capture_output=True,
             )
+        except Exception as e:
+            print(f"[aurapl] Could not modify PATH automatically: {e}")
+            print(f"[aurapl] Add this directory to PATH manually: {package_dir}")
 
-        winreg.CloseKey(reg_key)
+    else:
+        # ── macOS / Linux: create shell script ───────────────────────────
+        launcher_path = os.path.join(package_dir, "aurapl")
+        content = f'#!/bin/sh\nexec "{sys.executable}" -c "import aurapl; aurapl.run()" "$@"\n'
+        try:
+            with open(launcher_path, "w") as f:
+                f.write(content)
+            # Make it executable
+            st = os.stat(launcher_path)
+            os.chmod(launcher_path, st.st_mode | stat.S_IEXEC | stat.S_IXGRP | stat.S_IXOTH)
+        except PermissionError:
+            print(f"[aurapl] Could not write launcher to {launcher_path}. Try running with sudo.")
+            return
 
-    except Exception as e:
-        print(f"[aurapl] Could not modify PATH automatically: {e}")
-        print(f"[aurapl] Add this directory to PATH manually: {package_dir}")
+        # ── macOS / Linux: add to PATH via shell rc file ─────────────────
+        if package_dir in os.environ.get("PATH", "").split(os.pathsep):
+            return  # Already on PATH, nothing to do
 
+        if sys.platform == "darwin":
+            rc_files = [os.path.expanduser("~/.zshrc"), os.path.expanduser("~/.bash_profile")]
+        else:
+            rc_files = [os.path.expanduser("~/.bashrc"), os.path.expanduser("~/.profile")]
 
-create_aurapl_bat_and_add_to_path()
+        export_line = f'\nexport PATH="{package_dir}:$PATH"  # added by aurapl\n'
+        rc_file = next((f for f in rc_files if os.path.exists(f)), rc_files[0])
+
+        try:
+            with open(rc_file, "r") as f:
+                existing = f.read()
+            if package_dir not in existing:
+                with open(rc_file, "a") as f:
+                    f.write(export_line)
+                print(f"[aurapl] Added to PATH in {rc_file}. Restart your shell or run: source {rc_file}")
+        except Exception as e:
+            print(f"[aurapl] Could not modify {rc_file}: {e}")
+            print(f"[aurapl] Add this to PATH manually: {package_dir}")
+
+create_aurapl_launcher_and_add_to_path()
 
 # Run Command for Terminal
 def cmdrun():
