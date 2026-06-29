@@ -4,6 +4,7 @@ import sys
 import subprocess
 import stat
 import subprocess
+import pixelmdl 
 from turtle import *
 
 def create_aurapl_launcher_and_add_to_path():
@@ -104,11 +105,25 @@ def run():
        print("------AURAPL------")
        print("Commands:")
        print(" help - the command ""help"" is a command which shows a lot of information")
-       print(" More Commands Upcoming")
+       print(" quiz - the command ""quiz"" is a command which runs a quiz using PixelMDL")
        print("How to program using AuraPL -")
        print(" All Possible Commands for coding -")
        print("  print() - prints the value in the brackets")
+       print("  square() - draws a square")
+       print("  triangle() - draws a triangle")
+       print("  More Commands Upcoming")
        run()
+    if answer == "square":
+        square()
+        run()
+    if answer == "triangle":
+        triangle()
+        run()
+    if answer == "quiz":
+        pixelmdl.quiz()
+        print("The Quiz has been completed, You may now continue using AuraPL, Use the command 'help' for more information.")
+        run()
+
 
 def print(text):
     sys.stdout.write(text + "\n")
@@ -127,6 +142,24 @@ def square():
     for i in range(times):
         forward(100)
         left(90)
+
+    print("Process has been completed, Review the output and close the windows to end the process.")
+    print("Done!")
+    done()
+
+def triangle():
+    def reset():
+        clear()
+        setx(0)
+        sety(0)
+
+    reset()
+    pendown()
+
+    times = 3
+    for i in range(times):
+        forward(100)
+        left(120)
 
     print("Process has been completed, Review the output and close the windows to end the process.")
     print("Done!")
