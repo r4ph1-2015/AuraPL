@@ -4,7 +4,7 @@ import sys
 import subprocess
 import stat
 import subprocess
-import pixelmdl 
+import aurapl.pixelmdl as pixelmdl
 from turtle import *
 
 def create_aurapl_launcher_and_add_to_path():
