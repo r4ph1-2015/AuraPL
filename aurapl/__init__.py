@@ -98,36 +98,6 @@ def cmdrun():
     print("[aurapl] AuraPL has been initialized. Expect Bugs and Incomplete Features. Use 'help' command for more info.")
     run()
 
-# Basic Run Command
-def run():
-    answer = input()
-    if answer == "help":
-       print("------AURAPL------")
-       print("Commands:")
-       print(" help - the command ""help"" is a command which shows a lot of information")
-       print(" quiz - the command ""quiz"" is a command which runs a quiz using PixelMDL")
-       print(" square - the command ""square"" is a command which draws a square using turtle graphics")
-       print(" triangle - the command ""triangle"" is a command which draws a triangle using turtle graphics")
-       print(" More Commands Upcoming")
-       print("How to program using AuraPL -")
-       print(" All Possible Commands for coding -")
-       print("  print() - prints the value in the brackets")
-       print("  square() - draws a square")
-       print("  triangle() - draws a triangle")
-       print("  More Commands Upcoming")
-       run()
-    if answer == "square":
-        square()
-        run()
-    if answer == "triangle":
-        triangle()
-        run()
-    if answer == "quiz":
-        pixelmdl.quiz()
-        print("The Quiz has been completed, You may now continue using AuraPL, Use the command 'help' for more information.")
-        run()
-
-
 def print(text):
     sys.stdout.write(text + "\n")
 
@@ -167,3 +137,35 @@ def triangle():
     print("Process has been completed, Review the output and close the windows to end the process.")
     print("Done!")
     done()
+
+# Basic Run Command
+def run():
+    answer = input()
+    if answer == "help":
+       print("------AURAPL------")
+       print("Commands:")
+       print(" help - the command ""help"" is a command which shows a lot of information")
+       print(" quiz - the command ""quiz"" is a command which runs a quiz using PixelMDL")
+       print(" square - the command ""square"" is a command which draws a square using turtle graphics")
+       print(" triangle - the command ""triangle"" is a command which draws a triangle using turtle graphics")
+       print(" More Commands Upcoming")
+       print("How to program using AuraPL -")
+       print(" All Possible Commands for coding -")
+       print("  print() - prints the value in the brackets")
+       print("  square() - draws a square")
+       print("  triangle() - draws a triangle")
+       print("  More Commands Upcoming")
+       run()
+    if answer == "square":
+        square()
+        run()
+    if answer == "triangle":
+        triangle()
+        run()
+    if answer == "quiz":
+        pixelmdl.quiz()
+        print("The Quiz has been completed, You may now continue using AuraPL, Use the command 'help' for more information.")
+        run()
+
+cmdrun()
+
