@@ -1,4 +1,3 @@
-import Aurapl
+import aurapl
 from aurapl import *
-print("hello world")
-square()
+cmdrun()

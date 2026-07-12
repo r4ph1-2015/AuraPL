@@ -148,6 +148,7 @@ def run():
        print(" quiz - the command ""quiz"" is a command which runs a quiz using PixelMDL")
        print(" square - the command ""square"" is a command which draws a square using turtle graphics")
        print(" triangle - the command ""triangle"" is a command which draws a triangle using turtle graphics")
+       print(" devmode - the command ""devmode"" is a command which loads Developer Mode, which is specifically meant for PixelMDL.")
        print(" More Commands Upcoming")
        print("How to program using AuraPL -")
        print(" All Possible Commands for coding -")
@@ -163,9 +164,16 @@ def run():
         triangle()
         run()
     if answer == "quiz":
-        pixelmdl.quiz()
-        print("The Quiz has been completed, You may now continue using AuraPL, Use the command 'help' for more information.")
+        if pixelmdl.disabled:
+            print("Function \"quiz\" does not exist. Use Function \"devmode\" to enable PixelMDL Functions. Use the command 'help' for more information.")
+        else:
+            pixelmdl.quiz()
+            print("The Quiz has been completed, You may now continue using AuraPL, Use the command 'help' for more information.")
+        run()
+    if answer == "devmode":
+        pixelmdl.devmode()
+        print("Developer Mode has been completed, You may now continue using AuraPL, Use the command 'help' for more information.")
         run()
 
-cmdrun()
+
 
