@@ -1,2 +1,2 @@
 #!/bin/sh
-exec "/usr/bin/python3" -c "import aurapl; aurapl.run()" "$@"
+exec "/usr/bin/python3" -c "import aurapl; aurapl.cmdrun()" "$@"

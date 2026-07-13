@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "auraPL"
-version = "0.2a4"
+version = "0.2a5"
 description = "A Programming Language called auraPL"
 requires-python = ">=3.9"
 license = { text = "All Rights Reserved" }

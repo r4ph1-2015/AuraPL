@@ -14,7 +14,7 @@ def create_aurapl_launcher_and_add_to_path():
     if sys.platform == "win32":
         # ── Windows: create .bat ─────────────────────────────────────────
         launcher_path = os.path.join(package_dir, "aurapl.bat")
-        content = f'@echo off\n"{sys.executable}" -c "import aurapl; aurapl.run()" %*\n'
+        content = f'@echo off\n"{sys.executable}" -c "import aurapl; aurapl.cmdrun()" %*\n'
         try:
             with open(launcher_path, "w") as f:
                 f.write(content)
@@ -58,7 +58,7 @@ def create_aurapl_launcher_and_add_to_path():
     else:
         # ── macOS / Linux: create shell script ───────────────────────────
         launcher_path = os.path.join(package_dir, "aurapl")
-        content = f'#!/bin/sh\nexec "{sys.executable}" -c "import aurapl; aurapl.run()" "$@"\n'
+        content = f'#!/bin/sh\nexec "{sys.executable}" -c "import aurapl; aurapl.cmdrun()" "$@"\n'
         try:
             with open(launcher_path, "w") as f:
                 f.write(content)
