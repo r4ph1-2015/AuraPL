@@ -10,7 +10,7 @@ def lvl():
     print("Preparing Validation Tools for aurapl and pixelmdl...")
     print("Starting Validation for aurapl...")
     print("Please ignore anything that does not say [Loader] at the front.")
-    pmdl.square()
+    apl.square()
     answer = input("Did it open up a screen and show a square? (yes/no)")
     if answer == "yes":
         print("Thank you for validating this")
@@ -18,7 +18,7 @@ def lvl():
     else:
         print("Please report this through our Security Form available on Github")
         failed.append("square")
-    pmdl.triangle()
+    apl.triangle()
     answer = input("Did it open up a screen and show a triangle? (yes/no)")
     if answer == "yes":
         print("Thank you for validating this")
