@@ -103,13 +103,7 @@ def print(text):
     sys.stdout.write(text + "\n")
 
 def square():
-   
-    def reset():
-        clear()
-        setx(0)
-        sety(0)
 
-    reset()
     pendown()
 
     times = 4
@@ -122,12 +116,7 @@ def square():
     done()
 
 def triangle():
-    def reset():
-        clear()
-        setx(0)
-        sety(0)
-
-    reset()
+    
     pendown()
 
     times = 3
