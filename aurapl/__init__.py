@@ -116,7 +116,7 @@ def square():
     done()
 
 def triangle():
-    
+
     pendown()
 
     times = 3
@@ -165,7 +165,7 @@ def run():
         print("Developer Mode has been completed, You may now continue using AuraPL, Use the command 'help' for more information.")
         run()
     if answer == "validate":
-        apll.lvl()
+        print("Failed to load validation tools. Function for VALIDATING is currently in developement, and is not yet available.")
         run()
 
 

@@ -10,6 +10,7 @@ def lvl():
     print("Preparing Validation Tools for aurapl and pixelmdl...")
     print("Starting Validation for aurapl...")
     print("Please ignore anything that does not say [Loader] at the front.")
+    print("[Loader] VALIDATION IS CURRENTLY IN ALPHA STAGE")
     apl.square()
     answer = input("Did it open up a screen and show a square? (yes/no)")
     if answer == "yes":
