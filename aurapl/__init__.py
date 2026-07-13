@@ -5,6 +5,7 @@ import subprocess
 import stat
 import subprocess
 import aurapl.pixelmdl as pixelmdl
+import aurapl.loader as apll
 from turtle import *
 
 def create_aurapl_launcher_and_add_to_path():
@@ -173,6 +174,9 @@ def run():
     if answer == "devmode":
         pixelmdl.devmode()
         print("Developer Mode has been completed, You may now continue using AuraPL, Use the command 'help' for more information.")
+        run()
+    if answer == "validate":
+        apll.lvl()
         run()
 
 
