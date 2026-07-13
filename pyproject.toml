@@ -4,12 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "auraPL"
-version = "0.2a"
+version = "0.2a1"
 description = "A Programming Language called auraPL"
 requires-python = ">=3.9"
 license = { text = "All Rights Reserved" }
 dependencies = [
-    "pixelmdl"
+
 ]
 
 [tool.setuptools.packages.find]
