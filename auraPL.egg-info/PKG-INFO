@@ -1,8 +1,0 @@
-Metadata-Version: 2.4
-Name: auraPL
-Version: 0.2a0
-Summary: A Programming Language called auraPL
-License: All Rights Reserved
-Requires-Python: >=3.9
-Provides-Extra: nvm
-Requires-Dist: Hello-Raphael8954; extra == "nvm"

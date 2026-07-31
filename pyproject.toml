@@ -19,4 +19,4 @@ exclude = ["run*"]
 nvm = ["Hello-Raphael8954"]
 
 [project.scripts]
-aurapl = "aurapl.cli:cmdrun"
+aurapl = "aurapl:cmdrun"
