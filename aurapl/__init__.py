@@ -5,6 +5,7 @@ import subprocess
 import stat
 import subprocess
 import aurapl.pixelmdl as pixelmdl
+import aurapl.loader as apll
 from turtle import *
 
 def create_aurapl_launcher_and_add_to_path():
@@ -13,7 +14,7 @@ def create_aurapl_launcher_and_add_to_path():
     if sys.platform == "win32":
         # ── Windows: create .bat ─────────────────────────────────────────
         launcher_path = os.path.join(package_dir, "aurapl.bat")
-        content = f'@echo off\n"{sys.executable}" -c "import aurapl; aurapl.run()" %*\n'
+        content = f'@echo off\n"{sys.executable}" -c "import aurapl; aurapl.cmdrun()" %*\n'
         try:
             with open(launcher_path, "w") as f:
                 f.write(content)
@@ -57,7 +58,7 @@ def create_aurapl_launcher_and_add_to_path():
     else:
         # ── macOS / Linux: create shell script ───────────────────────────
         launcher_path = os.path.join(package_dir, "aurapl")
-        content = f'#!/bin/sh\nexec "{sys.executable}" -c "import aurapl; aurapl.run()" "$@"\n'
+        content = f'#!/bin/sh\nexec "{sys.executable}" -c "import aurapl; aurapl.cmdrun()" "$@"\n'
         try:
             with open(launcher_path, "w") as f:
                 f.write(content)
@@ -102,13 +103,7 @@ def print(text):
     sys.stdout.write(text + "\n")
 
 def square():
-   
-    def reset():
-        clear()
-        setx(0)
-        sety(0)
 
-    reset()
     pendown()
 
     times = 4
@@ -121,12 +116,7 @@ def square():
     done()
 
 def triangle():
-    def reset():
-        clear()
-        setx(0)
-        sety(0)
 
-    reset()
     pendown()
 
     times = 3
@@ -173,6 +163,9 @@ def run():
     if answer == "devmode":
         pixelmdl.devmode()
         print("Developer Mode has been completed, You may now continue using AuraPL, Use the command 'help' for more information.")
+        run()
+    if answer == "validate":
+        print("Failed to load validation tools. Function for VALIDATING is currently in developement, and is not yet available.")
         run()
 
 

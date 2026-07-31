@@ -1,3 +1,2 @@
 import aurapl
-from aurapl import *
-cmdrun()
+aurapl.cmdrun()

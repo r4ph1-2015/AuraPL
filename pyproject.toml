@@ -9,7 +9,6 @@ description = "A Programming Language called auraPL"
 requires-python = ">=3.9"
 license = { text = "All Rights Reserved" }
 dependencies = [
-    "pixelmdl"
 ]
 
 [tool.setuptools.packages.find]
@@ -19,4 +18,5 @@ exclude = ["run*"]
 [project.optional-dependencies]
 nvm = ["Hello-Raphael8954"]
 
+[project.scripts]
 aurapl = "aurapl.cli:cmdrun"
