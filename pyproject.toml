@@ -19,4 +19,4 @@ exclude = ["run*"]
 nvm = ["Hello-Raphael8954"]
 
 [project.scripts]
-aurapl = "aurapl:create_aurapl_launcher_and_add_to_path()"
+aurapl = "aurapl:create_aurapl_launcher_and_add_to_path"
