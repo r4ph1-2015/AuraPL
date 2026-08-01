@@ -64,8 +64,12 @@ if disabled == False:
             print("Lets repeat the Lol Function")
             lol()
 
-    def devmode():
-        print("Loading Developer Mode...")
+def devmode():
+    print("Loading Developer Mode...")
+    devd = "Yes"
+    if devd == "Yes":
+        print("Developer Mode is currently unavailable for this version, Please check back later for updates.")
+    else:   
         answerdev = input("Would you like to disable PixelMDL? (Yes/No)")
         global disabled
         if answerdev == "Yes":

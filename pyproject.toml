@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "auraPL"
-version = "0.2.0.1a"
+version = "0.2.0.1a2"
 description = "A Programming Language called auraPL"
 requires-python = ">=3.9"
 license = { text = "All Rights Reserved" }
@@ -19,4 +19,4 @@ exclude = ["run*"]
 nvm = ["Hello-Raphael8954"]
 
 [project.scripts]
-aurapl = "aurapl:cmdrun"
+aurapl = "aurapl:create_aurapl_launcher_and_add_to_path()"
