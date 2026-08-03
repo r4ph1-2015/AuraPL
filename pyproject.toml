@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Zinc.build"
-version = "0.2.0.1a3"
+version = "0.2.0.1a4"
 description = "A Programming Language called Zinc.build"
 requires-python = ">=3.9"
 license = { text = "All Rights Reserved" }

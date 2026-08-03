@@ -5,7 +5,6 @@ import subprocess
 import stat
 import subprocess
 import zincbuild.pixelmdl as pixelmdl
-import zincbuild.loader as apll
 from turtle import *
 
 def create_zincbuild_launcher_and_add_to_path():
