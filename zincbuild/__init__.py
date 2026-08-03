@@ -95,7 +95,7 @@ create_zincbuild_launcher_and_add_to_path()
 
 # Run Command for Terminal
 def cmdrun():
-    print("[zincbuild] ZincBuild has been initialized. Expect Bugs and Incomplete Features. Use 'help' command for more info.")
+    print("[Zincbuild] ZincBuild has been initialized. Expect rarely any bugs. Use 'help' command for more information on how to use ZincBuild.")
     run()
 
 def print(text):
