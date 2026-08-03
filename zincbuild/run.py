@@ -1,0 +1,2 @@
+import zincbuild
+zincbuild.cmdrun()

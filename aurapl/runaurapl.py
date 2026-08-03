@@ -1,3 +1,0 @@
-import aurapl
-
-aurapl.cmdrun()

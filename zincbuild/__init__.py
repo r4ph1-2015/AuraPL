@@ -4,17 +4,17 @@ import sys
 import subprocess
 import stat
 import subprocess
-import aurapl.pixelmdl as pixelmdl
-import aurapl.loader as apll
+import zincbuild.pixelmdl as pixelmdl
+import zincbuild.loader as apll
 from turtle import *
 
-def create_aurapl_launcher_and_add_to_path():
+def create_zincbuild_launcher_and_add_to_path():
     package_dir = os.path.dirname(os.path.abspath(__file__))
 
     if sys.platform == "win32":
         # ── Windows: create .bat ─────────────────────────────────────────
-        launcher_path = os.path.join(package_dir, "aurapl.bat")
-        content = f'@echo off\n"{sys.executable}" -c "import aurapl; aurapl.cmdrun()" %*\n'
+        launcher_path = os.path.join(package_dir, "zincbuild.bat")
+        content = f'@echo off\n"{sys.executable}" -c "import zincbuild; zincbuild.cmdrun()" %*\n'
         try:
             with open(launcher_path, "w") as f:
                 f.write(content)
@@ -57,8 +57,8 @@ def create_aurapl_launcher_and_add_to_path():
 
     else:
         # ── macOS / Linux: create shell script ───────────────────────────
-        launcher_path = os.path.join(package_dir, "aurapl")
-        content = f'#!/bin/sh\nexec "{sys.executable}" -c "import aurapl; aurapl.cmdrun()" "$@"\n'
+        launcher_path = os.path.join(package_dir, "zincbuild")
+        content = f'#!/bin/sh\nexec "{sys.executable}" -c "import zincbuild; zincbuild.cmdrun()" "$@"\n'
         try:
             with open(launcher_path, "w") as f:
                 f.write(content)
@@ -66,7 +66,7 @@ def create_aurapl_launcher_and_add_to_path():
             st = os.stat(launcher_path)
             os.chmod(launcher_path, st.st_mode | stat.S_IEXEC | stat.S_IXGRP | stat.S_IXOTH)
         except PermissionError:
-            print(f"[aurapl] Could not write launcher to {launcher_path}. Try running with sudo.")
+            print(f"[zincbuild] Could not write launcher to {launcher_path}. Try running with sudo.")
             return
 
         # ── macOS / Linux: add to PATH via shell rc file ─────────────────
@@ -78,7 +78,7 @@ def create_aurapl_launcher_and_add_to_path():
         else:
             rc_files = [os.path.expanduser("~/.bashrc"), os.path.expanduser("~/.profile")]
 
-        export_line = f'\nexport PATH="{package_dir}:$PATH"  # added by aurapl\n'
+        export_line = f'\nexport PATH="{package_dir}:$PATH"  # added by zincbuild\n'
         rc_file = next((f for f in rc_files if os.path.exists(f)), rc_files[0])
 
         try:
@@ -87,16 +87,16 @@ def create_aurapl_launcher_and_add_to_path():
             if package_dir not in existing:
                 with open(rc_file, "a") as f:
                     f.write(export_line)
-                print(f"[aurapl] Added to PATH in {rc_file}. Restart your shell or run: source {rc_file}")
+                print(f"[zincbuild] Added to PATH in {rc_file}. Restart your shell or run: source {rc_file}")
         except Exception as e:
-            print(f"[aurapl] Could not modify {rc_file}: {e}")
-            print(f"[aurapl] Add this to PATH manually: {package_dir}")
+            print(f"[zincbuild] Could not modify {rc_file}: {e}")
+            print(f"[zincbuild] Add this to PATH manually: {package_dir}")
 
-create_aurapl_launcher_and_add_to_path()
+create_zincbuild_launcher_and_add_to_path()
 
 # Run Command for Terminal
 def cmdrun():
-    print("[aurapl] AuraPL has been initialized. Expect Bugs and Incomplete Features. Use 'help' command for more info.")
+    print("[zincbuild] ZincBuild has been initialized. Expect Bugs and Incomplete Features. Use 'help' command for more info.")
     run()
 
 def print(text):
@@ -132,7 +132,7 @@ def triangle():
 def run():
     answer = input()
     if answer == "help":
-       print("------AURAPL------")
+       print("------ZINC.BUILD------")
        print("Commands:")
        print(" help - the command ""help"" is a command which shows a lot of information")
        print(" quiz - the command ""quiz"" is a command which runs a quiz using PixelMDL")
@@ -140,7 +140,7 @@ def run():
        print(" triangle - the command ""triangle"" is a command which draws a triangle using turtle graphics")
        print(" devmode - the command ""devmode"" is a command which loads Developer Mode, which is specifically meant for PixelMDL.")
        print(" More Commands Upcoming")
-       print("How to program using AuraPL -")
+       print("How to program using ZincBuild -")
        print(" All Possible Commands for coding -")
        print("  print() - prints the value in the brackets")
        print("  square() - draws a square")
@@ -158,11 +158,11 @@ def run():
             print("Function \"quiz\" does not exist. Use Function \"devmode\" to enable PixelMDL Functions. Use the command 'help' for more information.")
         else:
             pixelmdl.quiz()
-            print("The Quiz has been completed, You may now continue using AuraPL, Use the command 'help' for more information.")
+            print("The Quiz has been completed, You may now continue using ZincBuild, Use the command 'help' for more information.")
         run()
     if answer == "devmode":
         pixelmdl.devmode()
-        print("Developer Mode has been completed, You may now continue using AuraPL, Use the command 'help' for more information.")
+        print("Developer Mode has been completed, You may now continue using ZincBuild, Use the command 'help' for more information.")
         run()
     if answer == "validate":
         print("Failed to load validation tools. Function for VALIDATING is currently in developement, and is not yet available.")

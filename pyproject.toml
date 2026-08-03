@@ -3,9 +3,9 @@ requires = ["setuptools>=40.8.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "auraPL"
-version = "0.2.0.1a2"
-description = "A Programming Language called auraPL"
+name = "Zinc.build"
+version = "0.2.0.1a3"
+description = "A Programming Language called Zinc.build"
 requires-python = ">=3.9"
 license = { text = "All Rights Reserved" }
 dependencies = [
@@ -15,8 +15,5 @@ dependencies = [
 where = ["."]
 exclude = ["run*"]
 
-[project.optional-dependencies]
-nvm = ["Hello-Raphael8954"]
-
 [project.scripts]
-aurapl = "aurapl:create_aurapl_launcher_and_add_to_path"
+aurapl = "zincbuild:create_zincbuild_launcher_and_add_to_path"
