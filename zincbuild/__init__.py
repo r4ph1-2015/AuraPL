@@ -5,7 +5,7 @@ import subprocess
 import stat
 import subprocess
 import zincbuild.pixelmdl as pixelmdl
-from turtle import *
+import turtle
 
 def create_zincbuild_launcher_and_add_to_path():
     package_dir = os.path.dirname(os.path.abspath(__file__))
@@ -102,13 +102,14 @@ def print(text):
     sys.stdout.write(text + "\n")
 
 def square():
-
-    pendown()
+    
+    t = turtle.Turtle()
+    t.pendown()
 
     times = 4
     for i in range(times):
-        forward(100)
-        left(90)
+        t.forward(100)
+        t.left(90)
 
     print("Process has been completed, Review the output and close the windows to end the process.")
     print("Done!")
@@ -116,12 +117,13 @@ def square():
 
 def triangle():
 
-    pendown()
+    t = turtle.Turtle()
+    t.pendown()
 
     times = 3
     for i in range(times):
-        forward(100)
-        left(120)
+        t.forward(100)
+        t.left(120)
 
     print("Process has been completed, Review the output and close the windows to end the process.")
     print("Done!")
@@ -137,7 +139,6 @@ def run():
        print(" quiz - the command ""quiz"" is a command which runs a quiz using PixelMDL")
        print(" square - the command ""square"" is a command which draws a square using turtle graphics")
        print(" triangle - the command ""triangle"" is a command which draws a triangle using turtle graphics")
-       print(" devmode - the command ""devmode"" is a command which loads Developer Mode, which is specifically meant for PixelMDL.")
        print(" More Commands Upcoming")
        print("How to program using ZincBuild -")
        print(" All Possible Commands for coding -")
