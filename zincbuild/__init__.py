@@ -113,7 +113,7 @@ def square():
 
     print("Process has been completed, Review the output and close the windows to end the process.")
     print("Done!")
-    done()
+    turtle.done()
 
 def triangle():
 
@@ -127,8 +127,8 @@ def triangle():
 
     print("Process has been completed, Review the output and close the windows to end the process.")
     print("Done!")
-    done()
-
+    turtle.done()
+    
 # Basic Run Command
 def run():
     answer = input()
